@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-		<title>Liera - Business</title>
+		<title>Lira - Business</title>
 
 		<!-- Google font -->
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -45,13 +45,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<div id="top-header">
 				<div class="container">
 					<ul class="header-links pull-left">
-						<li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
-						<li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
-						<li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
+						<li><a href="#"><i class="fa fa-phone"></i>55 5138 0939</a></li>
+						<li><a href="#"><i class="fa fa-envelope-o"></i>ventasindustriales@lira.com</a></li>
+						<li><a href="#"><i class="fa fa-map-marker"></i>Av Cuitlahuac #17- C. Col. Popotla CDMX</a></li>
 					</ul>
 					<ul class="header-links pull-right">
-						<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-						<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+						<!-- <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li> -->
+						<li><a href="#"><i class="fa fa-user-o"></i> Iniciar Sesión</a></li>
 					</ul>
 				</div>
 			</div>
@@ -67,23 +67,40 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<div class="col-md-3">
 							<div class="header-logo">
 								<a href="<?php echo base_url("Inicio");?>" class="logo">
-									<img src="<?php echo base_url(); ?>/assets/img/logo.png" alt="">
+									<!-- <img src="<?php echo base_url(); ?>/assets/img/logo.png" alt=""> -->
+									<h1>LIRA</h1>
 								</a>
 							</div>
 						</div>
 						<!-- /LOGO -->
+<?php
 
+if(!empty($listCat))
+{
+    foreach($listCat as $record)
+    {
+		echo $record->nombreCategoria;
+	}
+}
+?>
 						<!-- SEARCH BAR -->
 						<div class="col-md-6">
 							<div class="header-search">
 								<form>
-									<select class="input-select">
-										<option value="0">All Categories</option>
-										<option value="1">Category 01</option>
-										<option value="1">Category 02</option>
+									<select class="input-select selec-categorias">
+										<option value="0">Todas las Categorias</option>
+										<?php if(!empty($listCat))
+											  {
+												foreach($listCat as $item)
+    											{
+										?>
+												<option value="<?php echo $item->idCategoria ?>"><?php echo $item->nombreCategoria ?></option>
+										<?php 	}
+											  }
+									 	?>	
 									</select>
-									<input class="input" placeholder="Search here">
-									<button class="search-btn">Search</button>
+									<input class="input" placeholder="Buscar productos, marcas y más...">
+									<button class="search-btn">Buscar</button>
 								</form>
 							</div>
 						</div>
@@ -93,20 +110,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<div class="col-md-3 clearfix">
 							<div class="header-ctn">
 								<!-- Wishlist -->
-								<div>
+								<!-- <div>
 									<a href="#">
 										<i class="fa fa-heart-o"></i>
 										<span>Your Wishlist</span>
 										<div class="qty">2</div>
 									</a>
-								</div>
+								</div> -->
 								<!-- /Wishlist -->
 
 								<!-- Cart -->
 								<div class="dropdown">
 									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
-										<span>Your Cart</span>
+										<span>Carito</span>
 										<div class="qty">3</div>
 									</a>
 									<div class="cart-dropdown">
@@ -173,13 +190,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#">Hot Deals</a></li>
-						<li><a href="<?php echo base_url("Inicio/store");?>">Categories</a></li>
-						<li><a href="#">Laptops</a></li>
-						<li><a href="#">Smartphones</a></li>
-						<li><a href="#">Cameras</a></li>
-						<li><a href="#">Accessories</a></li>
+						<?php 
+						if(!empty($listMenu))
+						{
+							foreach($listMenu as $item)
+    						{
+						?>
+						<!---class="active"-->
+						<li ><a href="<?php echo base_url().$item->ruta ?>"><?php echo $item->descripcion ?></a></li>
+						<?php 
+							}
+						}
+						?>
 					</ul>
 					<!-- /NAV -->
 				</div>
